@@ -1,0 +1,7 @@
+---
+
+- name: Setup packer build files
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: 
