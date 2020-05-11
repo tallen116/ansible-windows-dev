@@ -1,3 +1,4 @@
+# Output for each version of windows
 2008/
 2008r2/
 2012/
@@ -5,6 +6,9 @@
 2016/
 2019/
 
+# Packer related folders
 output-*/
-
 packer_cache/
+
+# IDE environments
+.vscode/
