@@ -1,0 +1,38 @@
+---
+
+- name: Ensure WinRM starts when the system has settled
+  win_service:
+    name: WinRM
+    start_mode: delayed
+
+- name: Create windows update category loop
+  set_fact:
+    win_update_category: "{{ win_update_category | default([]) }} + {{ packer_win_update_category }}"
+  with_sequence: count="{{ packer_win_update_loop }}"
+  when:
+    - packer_win_update_loop is defined
+    - packer_win_update_loop > 0
+
+- name: Debug win_update_category
+  debug:
+    var: win_update_category
+    verbosity: 2
+  
+- name: Install Windows Critical and Security Updates update until complete
+  win_updates:
+    category_names: "{{ item }}"
+    state: installed
+    reboot: yes
+    reboot_timeout: 3600
+  register: update_results
+    #until:
+    #  - update_results is not failed
+    #retries: 50
+    #delay: 30
+  ignore_errors: True
+  loop: "{{ win_update_category }}"
+
+- name: Revert WinRM startup mode
+  win_service:
+    name: WinRM
+    start_mode: auto

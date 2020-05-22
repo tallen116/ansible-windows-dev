@@ -1,0 +1,9 @@
+---
+
+packer_win_update_category:
+    - SecurityUpdates
+    - CriticalUpdates
+    - Updates
+    - UpdateRollups
+    - ServicePacks
+packer_win_update_loop: 5

@@ -1,0 +1,27 @@
+---
+
+- name: Show hidden folders and unhide file extensions for DEFAULT profile
+  win_regedit:
+    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: "{{ item['name'] }}"
+    data: "{{ item['data'] }}"
+    type: dword
+    state: present
+    hive: C:\Users\Default\NTUSER.dat
+  loop:
+    - name: Hidden
+      data: 1
+    - name: HideFileExt
+      data: 0
+- name: Show hidden folders and unhide file extensions for DEFAULT profile
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: "{{ item['name'] }}"
+    data: "{{ item['data'] }}"
+    type: dword
+    state: present
+  loop:
+    - name: Hidden
+      data: 1
+    - name: HideFileExt
+      data: 0

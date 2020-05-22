@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Ping Windows
+      win_ping:
+    # ngen.exe sometimes causes Ansible to fail or timeout
+    - name: Wait for ngen.exe to complete
+      win_wait_for_process:
+        process_name_exact: ngen
+        state: absent
+        timeout: 7200
+    - name: Update role
+      include_role:
+        name: updates
+    - name: Personlize
+      include_role:
+        name: personalize
