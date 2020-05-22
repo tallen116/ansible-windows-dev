@@ -32,9 +32,25 @@ One of the following hypervisors:
 
 ## How to use
 
-Create packer build files
+Create packer build files.  This will create folders for each build of Windows.
 
 ```
 ansible-playbook setup.yml
+
+```
+
+## Variables
+
+```
+packer_win_username: vagrant
+packer_win_password: vagrant
+
+packer_win_update_category:
+    - SecurityUpdates
+    - CriticalUpdates
+    - Updates
+    - UpdateRollups
+    - ServicePacks
+packer_win_update_loop: 5
 
 ```
