@@ -6,4 +6,5 @@ packer_win_update_category:
     - Updates
     - UpdateRollups
     - ServicePacks
+    - DefinitionUpdates
 packer_win_update_loop: 5
