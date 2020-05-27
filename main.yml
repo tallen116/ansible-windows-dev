@@ -1,7 +1,7 @@
 ---
 
 - hosts: all
-  gather_facts: yes
+  gather_facts: no
   tasks:
     - name: Ping Windows
       win_ping:
@@ -17,3 +17,6 @@
     - name: Personlize
       include_role:
         name: personalize
+    - name: Cleanup
+      include_role:
+        name: cleanup
