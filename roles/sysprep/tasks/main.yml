@@ -1,0 +1,21 @@
+---
+
+- name: Ensure directories exist
+  win_file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - C:\Windows\Panther\Unattend
+
+- name: Create Autounattend.xml
+  win_template:
+    src: Autounattend.xml.j2
+    dest: C:\Windows\Panther\Unattend\Autounattend.xml
+
+- name: Create pagefile
+  win_pagefile:
+    drive: C
+    automatic: yes
+
+- name: Run sysprep
+  win_shell: 'C:\Windows\System32\Sysprep\sysprep.exe /generalize /shutdown /oobe /unattend:C:\Windows\Panther\Unattend\Autounattend.xml'
