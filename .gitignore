@@ -9,6 +9,10 @@
 # Packer related folders
 output-*/
 packer_cache/
+*.box
+
+# Vagrant related files
+.vagrant/
 
 # IDE environments
 .vscode/
