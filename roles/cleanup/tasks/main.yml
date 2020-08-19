@@ -22,6 +22,11 @@
     name: wuauserv
     state: stopped
 
+- name: Stop Windows Error service
+  win_service:
+    name: WerSvc
+    state: stopped
+
 - name: Remove temp files
   win_file:
     path: "{{ item }}"
@@ -31,6 +36,8 @@
     - C:\Temp
     - C:\Windows\Temp
     - C:\Users\vagrant\AppData\Local\Temp
+    - C:\ProgramData\Microsoft\Windows\WER\ReportArchive
+    - C:\ProgramData\Microsoft\Windows\WER\ReportQueue
 
 - name: Remove all page files
   win_pagefile:
@@ -46,6 +53,7 @@
   win_pagefile:
     drive: C
     state: absent
+  register: _pagefile
 
 - name: Reboot if page file changed
   win_reboot:
